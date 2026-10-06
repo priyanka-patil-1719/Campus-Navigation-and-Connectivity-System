@@ -86,7 +86,7 @@ def change_graph(action):
 
 
 @pages.route("/traversal", methods=["GET"])
-@pages.route("/traversal/<algorithm>", methods=["POST"])
+@pages.route("/traversal/<algorithm>", methods=["POST"], endpoint="run_traversal")
 def traversal(algorithm=None):
     result = None
     start = request.form.get("start", "")

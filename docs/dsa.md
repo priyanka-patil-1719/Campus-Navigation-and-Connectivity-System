@@ -86,7 +86,7 @@ An invalid starting vertex raises `ValueError`. A one-vertex graph visits that v
 
 `load_sample()` constructs a real `Graph` using `data/sample_graph.json`. It calls the same vertex/edge methods as user edits. In directed mode, sample connections follow the direction written in JSON.
 
-`visualization_data()` exports nodes, edges and mode flags. Sample locations use fixed fictional drawing positions. Adding a custom location switches to a deterministic four-column layout with sufficient height. The coordinates describe a diagram, not geography. No layout physics or graph package is used.
+`visualization_data()` exports nodes, edges and mode flags. Sample locations keep their fixed fictional drawing positions and campus icons. Custom locations extend the map below them in predictable four-column rows; on an entirely custom campus, those rows start at the top. The map height grows as needed. The renderer bends paths around buildings that would otherwise lie on a straight connection. The coordinates describe a diagram, not geography. No layout physics or graph package is used.
 
 ## Complexity
 

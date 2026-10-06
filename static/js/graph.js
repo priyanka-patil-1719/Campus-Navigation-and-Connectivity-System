@@ -54,8 +54,15 @@
     const ux = dx / length;
     const uy = dy / length;
     const reciprocal = data.directed && data.edges.some(other => other.source === edge.target && other.target === edge.source);
-    // Offset reciprocal arrows so both directions and weights remain visible.
-    const bend = reciprocal ? 25 : 0;
+    // Drawing geometry only: bend a path if a third building blocks the line.
+    const crossesBuilding = data.nodes.some(node => {
+      if (node === source || node === target) return false;
+      const projection = ((node.x - source.x) * dx + (node.y - source.y) * dy) / (length * length);
+      const distance = Math.hypot(node.x - source.x - projection * dx, node.y - source.y - projection * dy);
+      return projection > 0.05 && projection < 0.95 && distance < 48;
+    });
+    // Opposite arrows bend in opposite directions.
+    const bend = crossesBuilding ? 140 : (reciprocal ? 25 : 0);
     const x1 = source.x + ux * 32;
     const y1 = source.y + uy * 32;
     const x2 = target.x - ux * 36;

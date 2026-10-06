@@ -19,19 +19,21 @@ def load_sample(directed=False, weighted=False):
 
 
 def visualization_data(graph):
-    """A fixed campus layout; custom campuses use a predictable four-column grid."""
+    """Keep campus landmarks fixed and extend the map for custom locations."""
     sample = json.loads(SAMPLE_PATH.read_text(encoding="utf-8"))
     positions = {node["name"]: node for node in sample["nodes"]}
-    use_campus_layout = all(name in positions for name in graph.vertices)
     nodes = []
+    custom_index = 0
+    custom_top = 620 if any(name in positions for name in graph.vertices) else 85
     for index, name in enumerate(graph.vertices):
-        if use_campus_layout:
+        if name in positions:
             node = dict(positions[name])
         else:
-            node = {"name": name, "x": 115 + (index % 4) * 220,
-                    "y": 85 + (index // 4) * 140, "icon": "building"}
+            node = {"name": name, "x": 115 + (custom_index % 4) * 220,
+                    "y": custom_top + (custom_index // 4) * 140, "icon": "building"}
+            custom_index += 1
         node["number"] = index + 1
         nodes.append(node)
-    height = 540 if use_campus_layout else max(420, ((len(nodes) + 3) // 4) * 140 + 30)
+    height = max(540, max((node["y"] for node in nodes), default=0) + 85)
     return {"nodes": nodes, "edges": graph.edges(), "directed": graph.directed,
             "weighted": graph.weighted, "width": 900, "height": height}

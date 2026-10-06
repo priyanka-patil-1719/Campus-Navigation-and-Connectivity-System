@@ -1,4 +1,5 @@
 import unittest
+from html.parser import HTMLParser
 
 from app import create_app
 
@@ -65,6 +66,25 @@ class RouteTests(unittest.TestCase):
         response = self.client.post("/traversal/bfs", data={"start": "Main Gate"})
         self.assertIn(b"Add a location before running a traversal", response.data)
         self.assertNotIn(b'id="traversal-data"', response.data)
+
+    def test_rendered_traversal_buttons_submit_to_working_routes(self):
+        class ButtonParser(HTMLParser):
+            def __init__(self):
+                super().__init__()
+                self.actions = []
+
+            def handle_starttag(self, tag, attrs):
+                attributes = dict(attrs)
+                if tag == "button" and "formaction" in attributes:
+                    self.actions.append(attributes["formaction"])
+
+        parser = ButtonParser()
+        parser.feed(self.client.get("/traversal").get_data(as_text=True))
+        self.assertEqual(parser.actions, ["/traversal/bfs", "/traversal/dfs"])
+        for action in parser.actions:
+            response = self.client.post(action, data={"start": "Main Gate"})
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b'id="traversal-data"', response.data)
 
     def test_invalid_forms_show_errors(self):
         for name in ("", "   ", "Main Gate"):

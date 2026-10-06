@@ -155,6 +155,9 @@ class GraphTests(unittest.TestCase):
         self.assertEqual(len(data["nodes"]), 11)
         self.assertEqual(len({(n["x"], n["y"]) for n in data["nodes"]}), 11)
         self.assertTrue(all(0 < n["y"] < data["height"] for n in data["nodes"]))
+        gate = next(node for node in data["nodes"] if node["name"] == "Main Gate")
+        self.assertEqual((gate["x"], gate["y"], gate["icon"]), (100, 265, "gate"))
+        self.assertGreater(data["nodes"][-1]["y"], 540)
 
 
 if __name__ == "__main__":
