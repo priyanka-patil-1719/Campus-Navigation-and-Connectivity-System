@@ -1,0 +1,12 @@
+<header class="site-header">
+  <div class="nav-shell">
+    <a class="brand" href="{{ url_for('pages.index') }}"><span class="brand-mark">{{ icon('map') }}</span><span>Campus<span class="brand-blue">Nav</span><small>CONNECT. EXPLORE. UNDERSTAND.</small></span></a>
+    <button type="button" class="icon-button mobile-menu" aria-label="Toggle navigation" aria-expanded="false" aria-controls="main-nav">{{ icon('menu') }}</button>
+    <nav id="main-nav" aria-label="Main navigation">
+      {% for key, endpoint, label, symbol in [('dashboard','index','Overview','grid'),('graph','explorer','Graph Explorer','network'),('traversal','traversal','Traversal','route'),('representation','representation','Representations','table'),('about','about','DSA Concepts','book')] %}
+      <a href="{{ url_for('pages.' + endpoint) }}" class="nav-link {{ 'active' if active == key else '' }}" {% if active == key %}aria-current="page"{% endif %}>{{ icon(symbol) }}{{ label }}</a>
+      {% endfor %}
+    </nav>
+    <span class="academic-badge"><span></span> DSA MINI PROJECT</span>
+  </div>
+</header>

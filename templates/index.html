@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="page-heading dashboard-heading">
+  <div><div class="eyebrow"><span class="eyebrow-line"></span> YOUR CAMPUS, CONNECTED</div><h1>Campus Navigation<br><span>&amp; Connectivity System</span></h1><p>Explore campus connectivity using Graphs, BFS and DFS.</p></div>
+  <a class="button primary" href="{{ url_for('pages.explorer') }}">Open Graph Explorer {{ icon('arrow') }}</a>
+</section>
+<section class="stats-grid" aria-label="Graph summary">
+  <article class="stat-card"><span class="stat-icon blue">{{ icon('pin') }}</span><div><span class="stat-label">Campus locations</span><strong>{{ vertices|length }} <small>vertices</small></strong></div><span class="stat-corner">01</span></article>
+  <article class="stat-card"><span class="stat-icon green">{{ icon('network') }}</span><div><span class="stat-label">Path connections</span><strong>{{ edges|length }} <small>edges</small></strong></div><span class="stat-corner">02</span></article>
+  <article class="stat-card"><span class="stat-icon orange">{{ icon('route') }}</span><div><span class="stat-label">Current graph</span><strong class="stat-word">{{ 'Directed' if graph.directed else 'Undirected' }}</strong><small>{{ 'Weighted' if graph.weighted else 'Unweighted' }} connections</small></div><span class="stat-corner">03</span></article>
+  <article class="stat-card"><span class="stat-icon purple">{{ icon('book') }}</span><div><span class="stat-label">Traversal algorithms</span><strong class="stat-word">BFS <span class="subtle">&amp;</span> DFS</strong><small>Two ways to explore</small></div><span class="stat-corner">04</span></article>
+</section>
+<section class="overview-grid">
+  <article class="card map-card"><div class="card-heading"><div><div class="section-kicker">THE BIG PICTURE</div><h2>Your campus at a glance</h2></div><a class="text-link" href="{{ url_for('pages.explorer') }}">Explore map {{ icon('arrow') }}</a></div>{% include 'components/graph_canvas.html' %}</article>
+  <aside class="overview-aside">
+    <article class="card journey-card"><span class="small-label">FROM PLACES TO PATHS</span><h2>A campus.<br>A connected graph.</h2><p>Every location is a vertex.<br>Every path is an edge.<br>See how it all connects.</p><div class="mini-network" aria-hidden="true"><span>{{ icon('gate') }}</span><i></i><span>{{ icon('building') }}</span><i></i><span>{{ icon('book') }}</span></div><a href="{{ url_for('pages.about') }}" class="text-link">Meet the graph {{ icon('arrow') }}</a></article>
+    <article class="card start-card"><span class="section-kicker">TRY A TRAVERSAL</span><h2>Where will you start?</h2><p>Pick a location and follow the algorithm, one step at a time.</p><a class="button primary full-width" href="{{ url_for('pages.traversal') }}">{{ icon('play') }} Launch traversal</a><div class="algorithm-hints"><span><i class="green-dot"></i>BFS · level by level</span><span><i class="orange-dot"></i>DFS · branch by branch</span></div></article>
+  </aside>
+</section>
+<section class="learning-grid" aria-label="Explore the project">
+  <a class="card learning-card" href="{{ url_for('pages.explorer') }}"><span class="step-index">01 / BUILD</span><div>{{ icon('network') }}<h3>Make it your campus</h3></div><p>Add locations, connect paths and experiment with graph types.</p><span class="text-link">Edit the graph {{ icon('arrow') }}</span></a>
+  <a class="card learning-card" href="{{ url_for('pages.representation') }}"><span class="step-index">02 / INSPECT</span><div>{{ icon('table') }}<h3>Look beneath the map</h3></div><p>See the same campus as an adjacency list and an adjacency matrix.</p><span class="text-link">View representations {{ icon('arrow') }}</span></a>
+  <a class="card learning-card" href="{{ url_for('pages.about') }}"><span class="step-index">03 / UNDERSTAND</span><div>{{ icon('book') }}<h3>Connect theory to practice</h3></div><p>Understand the data structures behind every connection and traversal.</p><span class="text-link">Explore DSA concepts {{ icon('arrow') }}</span></a>
+</section>
+{% endblock %}

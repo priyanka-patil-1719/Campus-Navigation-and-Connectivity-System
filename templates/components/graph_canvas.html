@@ -1,0 +1,10 @@
+<div class="map-toolbar"><div><span class="status-dot"></span> {{ vertices|length }} locations <span class="toolbar-divider">/</span> {{ edges|length }} connections</div><div class="map-tags"><span>{{ 'Directed' if graph.directed else 'Undirected' }}</span><span>{{ 'Weighted · meters' if graph.weighted else 'Unweighted' }}</span></div></div>
+<div class="map-scroll" tabindex="0" aria-label="Campus graph. Scroll horizontally on smaller screens.">
+  <div id="campus-map" class="campus-map" data-selectable="{{ 'true' if active == 'traversal' else 'false' }}">
+    <span class="map-region region-north">ACADEMIC QUARTER</span><span class="map-region region-south">CAMPUS COMMONS</span>
+    <span class="compass" aria-hidden="true">N<span>↑</span></span>
+  </div>
+</div>
+<div class="map-footer"><div class="legend"><span><i class="legend-node"></i>Location</span><span><i class="legend-line"></i>Path</span>{% if active == 'traversal' %}<span><i class="legend-node green"></i>Visited</span><span><i class="legend-node orange"></i>Current</span>{% endif %}</div><span class="map-note">Schematic campus · not to scale</span></div>
+<script type="application/json" id="graph-data">{{ graph_data|tojson }}</script>
+<noscript><p class="notice">Enable JavaScript to view the campus drawing. The forms, traversal order and <a href="{{ url_for('pages.representation') }}">graph representations</a> work without it.</p></noscript>

@@ -1,0 +1,30 @@
+{
+  "nodes": [
+    {"name": "Main Gate", "x": 100, "y": 265, "icon": "gate"},
+    {"name": "Admin Building", "x": 305, "y": 235, "icon": "building"},
+    {"name": "Parking", "x": 130, "y": 445, "icon": "parking"},
+    {"name": "Computer Department", "x": 315, "y": 70, "icon": "computer"},
+    {"name": "Library", "x": 530, "y": 150, "icon": "book"},
+    {"name": "Canteen", "x": 350, "y": 445, "icon": "coffee"},
+    {"name": "Laboratory", "x": 535, "y": 335, "icon": "flask"},
+    {"name": "Auditorium", "x": 750, "y": 70, "icon": "building"},
+    {"name": "Sports Ground", "x": 770, "y": 280, "icon": "flag"},
+    {"name": "Hostel", "x": 755, "y": 455, "icon": "home"}
+  ],
+  "edges": [
+    ["Main Gate", "Admin Building", 100],
+    ["Main Gate", "Parking", 80],
+    ["Admin Building", "Computer Department", 120],
+    ["Admin Building", "Library", 150],
+    ["Admin Building", "Canteen", 180],
+    ["Parking", "Canteen", 200],
+    ["Computer Department", "Library", 90],
+    ["Library", "Auditorium", 160],
+    ["Library", "Laboratory", 110],
+    ["Canteen", "Laboratory", 130],
+    ["Canteen", "Hostel", 250],
+    ["Laboratory", "Sports Ground", 170],
+    ["Auditorium", "Sports Ground", 190],
+    ["Sports Ground", "Hostel", 140]
+  ]
+}

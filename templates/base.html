@@ -1,0 +1,28 @@
+{% from 'components/icons.html' import icon, symbols %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#245bd9">
+  <meta name="description" content="An interactive campus graph for learning connectivity, adjacency representations, BFS and DFS.">
+  <title>{{ title }} · CampusNav</title>
+  <link rel="icon" href="{{ url_for('static', filename='favicon.svg') }}" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/graph.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+  <script src="{{ url_for('static', filename='js/ui.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/graph.js') }}" defer></script>
+</head>
+<body>
+{{ symbols() }}
+<a class="skip-link" href="#main">Skip to content</a>
+{% include 'components/navbar.html' %}
+<main id="main" class="page-shell">
+  {% include 'components/flash.html' %}
+  {% block content %}{% endblock %}
+</main>
+<footer class="site-footer"><span>{{ icon('network') }} Campus Navigation &amp; Connectivity System</span><span>A graph theory mini-project <span class="footer-dot">·</span> Built to explore. Designed to learn.</span></footer>
+{% block scripts %}{% endblock %}
+</body>
+</html>
